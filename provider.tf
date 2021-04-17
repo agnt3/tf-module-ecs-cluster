@@ -4,7 +4,4 @@ provider "aws" {
 
 terraform {
   required_version = ">= 0.12.9"
-  backend "s3" {
-    bucket = "agnt3-terraform-cluster-state"
-  }
 }
