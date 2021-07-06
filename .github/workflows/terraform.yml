@@ -1,10 +1,12 @@
 name: 'Terraform Plan Pipeline'
 
 on:
-  push:
-    branches:
-    - master
-  pull_request:
+  workflow_run:
+    workflows:
+      - Terraform
+    branches: [master]
+    types:
+      - requested
 
 jobs:
   terraform:
