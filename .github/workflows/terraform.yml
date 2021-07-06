@@ -18,15 +18,11 @@ jobs:
 
     - name: Setup Terraformm
       uses: hashicorp/setup-terraform@v1
+      with:
+        args: '-var-file="production.tfvars"'
       
     - name: Terraform Init
-      uses: hashicorp/terraform-github-actions@master
-      with:
-        tf_actions_version: 0.12.13
-        tf_actions_subcommand: 'init'
-        tf_actions_working_dir: '.'
-        tf_actions_comment: true
-        args: '-var-file="production.tfvars"'
+      run: terraform init
       
     - name: "Configure AWS Credentials"
       uses: aws-actions/configure-aws-credentials@v1
