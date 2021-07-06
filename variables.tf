@@ -15,14 +15,14 @@ variable "vpc_public_subnet_az" {
 
 variable "vpc_private_subnet_cidr" {
   type = string
-  description = "CIDR of VPC private subnet."
   default = "10.0.1.0/24"
+  description = "CIDR of VPC private subnet."
 }
 
 variable "vpc_public_subnet_cidr" {
   type = string
-  description = "CIDR of VPC public subnet."
   default = "10.0.2.0/24"
+  description = "CIDR of VPC public subnet."
 }
 
 ################# ECS #################
