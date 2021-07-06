@@ -18,9 +18,7 @@ jobs:
 
     - name: Setup Terraformm
       uses: hashicorp/setup-terraform@v1
-      with:
-        args: '-var-file="production.tfvars"'
-      
+
     - name: Terraform Init
       run: terraform init
       
@@ -32,4 +30,4 @@ jobs:
         aws-region: us-east-1
 
     - name: Terraform Plan
-      run: terraform plan
+      run: terraform plan -var-file="production.tfvars"
