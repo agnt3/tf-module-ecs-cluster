@@ -20,7 +20,6 @@ jobs:
       uses: hashicorp/setup-terraform@v1
       
     - name: Terraform Init
-      run: terraform init
       uses: hashicorp/terraform-github-actions@master
       with:
         args: '-var-file="production.tfvars"'
