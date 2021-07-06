@@ -21,6 +21,9 @@ jobs:
       
     - name: Terraform Init
       run: terraform init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        args: '-var-file="production.tfvars"'
       
     - name: "Configure AWS Credentials"
       uses: aws-actions/configure-aws-credentials@v1
@@ -31,5 +34,3 @@ jobs:
 
     - name: Terraform Plan
       run: terraform plan
-      with:
-        args: '-var-file="production.tfvars"'
