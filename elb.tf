@@ -40,7 +40,7 @@ resource "aws_launch_template" "container_instance_launch_template" {
   name_prefix            = "agnt3-instance-"
   user_data              = base64encode(data.template_file.user_data.rendered)
   image_id               = data.aws_ami.ecs_ami.image_id
-  instance_type          = "t3.micro"
+  instance_type          = var.launch_template_instance_type
   vpc_security_group_ids = [aws_security_group.ecs_sg.id]
 
   iam_instance_profile {

@@ -47,9 +47,6 @@ variable "asg_max_instances" {
   description = ""
 }
 
-################# ELB #################
-variable "elb_instance_type" {
+variable "launch_template_instance_type" {
   type = string
-  description = "AWS instance type of container instances."
-  default = "t3.micro"
 }
