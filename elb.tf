@@ -2,7 +2,7 @@ resource "aws_lb" "cluster_load_balancer" {
   name               = "edge-cluster"
   internal           = false
   load_balancer_type = "network"
-  subnets            = [ aws_subnet.external_subnet.id ]
+  subnets            = [ aws_subnet.public_subnet.id ]
 }
 
 resource "aws_lb_listener" "lb_listener" {
@@ -17,7 +17,7 @@ resource "aws_lb_listener" "lb_listener" {
 
 resource "aws_lb_target_group" "hosts_target_group" {
   name       = "container-instances-target-group"
-  vpc_id     = aws_vpc.primary_vpc.id
+  vpc_id     = aws_vpc.cluster_vpc.id
   port       = 80
   protocol   = "TCP"
   depends_on = [
@@ -36,13 +36,14 @@ data "template_file" "user_data" {
   }
 }
 
-resource "aws_launch_template" "foobar" {
-  name_prefix          = "agnt-instance-"
-  user_data            = base64encode(data.template_file.user_data.rendered)
-  iam_instance_profile {
-    name = aws_iam_instance_profile.ecs_agent.name
-  }
+resource "aws_launch_template" "container_instance_launch_template" {
+  name_prefix            = "agnt3-instance-"
+  user_data              = base64encode(data.template_file.user_data.rendered)
   image_id               = data.aws_ami.ecs_ami.image_id
   instance_type          = "t3.micro"
   vpc_security_group_ids = [aws_security_group.ecs_sg.id]
+
+  iam_instance_profile {
+    name = aws_iam_instance_profile.ecs_agent.name
+  }
 }

@@ -1,5 +1,5 @@
 resource "aws_security_group" "ecs_sg" {
-  vpc_id = aws_vpc.primary_vpc.id
+  vpc_id = aws_vpc.cluster_vpc.id
 
   ingress {
     from_port       = 80
