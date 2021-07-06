@@ -3,7 +3,7 @@ name: 'Terraform Plan Pipeline'
 on:
   workflow_run:
     workflows:
-      - Terraform
+      - Terraform Plan Pipeline
     branches: [master]
     types:
       - requested
