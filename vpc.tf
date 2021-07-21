@@ -60,8 +60,8 @@ resource "aws_route_table_association" "private_route_table_association" {
 }
 
 resource "aws_subnet" "private_subnet" {
-  vpc_id            = aws_vpc.cluster_vpc.id
-  cidr_block        = var.vpc_private_subnet_cidr
-  availability_zone = data.aws_availability_zone.private_subnet.id
+  vpc_id                  = aws_vpc.cluster_vpc.id
+  cidr_block              = var.vpc_private_subnet_cidr
+  availability_zone       = data.aws_availability_zone.private_subnet.id
   map_public_ip_on_launch = false
 }
