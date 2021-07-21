@@ -30,4 +30,4 @@ jobs:
         aws-region: us-east-1
 
     - name: Terraform Plan
-      run: terraform apply -var-file="production.tfvars"
+      run: terraform apply -var-file="production.tfvars" -auto-approve
