@@ -5,9 +5,11 @@ resource "aws_autoscaling_group" "autoscaling" {
   min_size            = var.asg_min_instances
   vpc_zone_identifier = [aws_subnet.private_subnet.id]
   health_check_type   = "EC2"
+
   launch_template {
     id = aws_launch_template.container_instance_launch_template.id
   }
+
   lifecycle {
     create_before_destroy = true
   }
