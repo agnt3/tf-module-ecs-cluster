@@ -1,4 +1,4 @@
-name: 'Terraform Plan Pipeline'
+name: 'Deployment'
 
 on:
   workflow_dispatch: 
