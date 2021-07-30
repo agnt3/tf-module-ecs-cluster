@@ -1,8 +1,9 @@
 resource "aws_lb" "cluster_load_balancer" {
   name               = "edge-cluster"
-  load_balancer_type = "network"
+  load_balancer_type = "application"
   internal           = false
-  subnets            = [ aws_subnet.public_subnet.id ]
+  subnets            = aws_subnet.public_subnet.*.id
+  security_groups    = [ aws_security_group.ecs_sg_alb.id ]
 }
 
 data "template_file" "user_data" {
@@ -18,7 +19,7 @@ resource "aws_launch_template" "container_instance_launch_template" {
   user_data              = base64encode(data.template_file.user_data.rendered)
   image_id               = data.aws_ami.ecs_ami.image_id
   instance_type          = var.launch_template_instance_type
-  vpc_security_group_ids = [ aws_security_group.ecs_sg.id ]
+  vpc_security_group_ids = [ aws_security_group.ecs_sg_container_instance.id ]
 
   iam_instance_profile {
     name = aws_iam_instance_profile.ecs_agent.name

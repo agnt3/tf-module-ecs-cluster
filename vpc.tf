@@ -3,7 +3,8 @@ data "aws_availability_zone" "private_subnet" {
 }
 
 data "aws_availability_zone" "public_subnet" {
-  name = var.vpc_public_subnet_az
+  count = length(var.vpc_public_subnet_az)
+  name = var.vpc_public_subnet_az[count.index]
 }
 
 resource "aws_vpc" "cluster_vpc" {
@@ -20,7 +21,7 @@ resource "aws_eip" "public_subnet_elastic_ip" {
 }
 
 resource "aws_nat_gateway" "ngt" {
-  subnet_id     = aws_subnet.public_subnet.id
+  subnet_id     = aws_subnet.public_subnet[0].id
   allocation_id = aws_eip.public_subnet_elastic_ip.id
 }
 
@@ -34,14 +35,16 @@ resource "aws_route_table" "public_route_table" {
 }
 
 resource "aws_route_table_association" "public_route_table_association" {
-  subnet_id      = aws_subnet.public_subnet.id
+  count          = 2
+  subnet_id      = aws_subnet.public_subnet[count.index].id
   route_table_id = aws_route_table.public_route_table.id
 }
 
 resource "aws_subnet" "public_subnet" {
+  count             = 2
   vpc_id            = aws_vpc.cluster_vpc.id
-  cidr_block        = var.vpc_public_subnet_cidr
-  availability_zone = data.aws_availability_zone.public_subnet.id
+  cidr_block        = var.vpc_public_subnet_cidr[count.index]
+  availability_zone = data.aws_availability_zone.public_subnet[count.index].id
 }
 
 # Private subnet

@@ -9,7 +9,7 @@ variable "vpc_private_subnet_az" {
 }
 
 variable "vpc_public_subnet_az" {
-  type = string
+  type = list(string)
   description = "Availability Zone that public subnet will be created."
 }
 
@@ -20,8 +20,8 @@ variable "vpc_private_subnet_cidr" {
 }
 
 variable "vpc_public_subnet_cidr" {
-  type = string
-  default = "10.0.2.0/24"
+  type        = list(string)
+  default     = ["10.0.2.0/24", "10.0.3.0/24"]
   description = "CIDR of VPC public subnet."
 }
 
