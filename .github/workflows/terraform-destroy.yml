@@ -5,7 +5,7 @@ on:
 
 jobs:
   terraform:
-    name: 'Cluster Build'
+    name: 'Cluster Destroy'
     runs-on: ubuntu-latest
 
     defaults:
@@ -30,4 +30,4 @@ jobs:
       run: terraform init
 
     - name: Terraform Plan
-      run: terraform apply -var-file="production.tfvars" -auto-approve
+      run: terraform destroy -var-file="production.tfvars" -auto-approve
