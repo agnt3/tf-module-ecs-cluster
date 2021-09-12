@@ -1,11 +1,11 @@
-name: 'Deployment'
+name: 'Cluster Build'
 
 on:
   workflow_dispatch: 
 
 jobs:
   terraform:
-    name: 'Cluster Build'
+    name: 'Terraform'
     runs-on: ubuntu-latest
 
     defaults:

@@ -1,11 +1,11 @@
-name: 'Deployment'
+name: 'Cluster Destroy'
 
 on:
   workflow_dispatch: 
 
 jobs:
   terraform:
-    name: 'Cluster Destroy'
+    name: 'Terraform'
     runs-on: ubuntu-latest
 
     defaults:
